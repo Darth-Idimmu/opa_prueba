@@ -6,6 +6,41 @@ Una serie de excursionistas desea crear un software que permita determinar los e
 
 Inicializar el proyecto con npm install y npm run dev para correr el proyecto.
 
+```markdown
+### ✅ Requerimientos Implementados
+  1. **Multiplataforma**  
+    - ✔️ Funciona en Windows, macOS y Linux mediante navegadores modernos  
+    - ✔️ Diseño responsive compatible con móviles (Bootstrap 5)  
+
+  2. **Interoperabilidad**  
+    - ✔️ API de localStorage estándar compatible con todos los navegadores
+
+  3. **Mantenibilidad**  
+    - ✔️ Arquitectura modular (4 módulos independientes)  
+    ```javascript
+    // Ejemplo de estructura modular
+    const Config = { ... };  // Configuraciones
+    const Utils = { ... };   // Funciones auxiliares
+    const Persistence = { ... };  // Capa de persistencia
+    const CombinationCalculator = { ... };  // Lógica principal
+    ```
+
+  4. **Control de versiones**  
+    - ✔️ Repositorio en GitHub  
+    - ✔️ Commits semánticos
+    (git clone git@github.com:Darth-Idimmu/opa_prueba.git)
+
+  5. **Persistencia de Datos**  
+    - ✔️ Guarda y recupera datos de localStorage  
+    - ✔️ Datos almacenados en formato JSON
+
+  6. **Escalabilidad Documentada**  
+    - ✔️ Documentación de la estructura modular  
+    - ✔️ Documentación de la API de localStorage
+```
+
+
+
 
 
 
