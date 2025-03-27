@@ -17,20 +17,51 @@ const Config = {
 
 // Módulo de utilidades
 const Utils = {
-  getInputValue: (selector) => parseInt(document.querySelector(selector).value),
+  getInputValue: (selector) => {
+    const value = document.querySelector(selector).value;
+    return value ? parseInt(value) : null;
+  },
   showElement: (selector) => document.querySelector(selector).style.display = 'block',
   clearElement: (selector) => document.querySelector(selector).innerHTML = ''
+};
+
+// Módulo de persistencia
+const Persistence = {
+  saveSettings: (minCal, maxW) => {
+    localStorage.setItem('lastSettings', JSON.stringify({
+      minCalories: minCal,
+      maxWeight: maxW
+    }));
+  },
+
+  loadSettings: () => {
+    const saved = JSON.parse(localStorage.getItem('lastSettings'));
+    if (saved) {
+      document.querySelector(Config.selectors.minCalories).value = saved.minCalories;
+      document.querySelector(Config.selectors.maxWeight).value = saved.maxWeight;
+    }
+  },
+
+  saveCombination: (combination) => {
+    const history = JSON.parse(localStorage.getItem('calculationHistory') || '[]');
+    history.push({
+      date: new Date().toISOString(),
+      combination
+    });
+    localStorage.setItem('calculationHistory', JSON.stringify(history.slice(-10)));
+  }
 };
 
 // Módulo principal de cálculo
 const CombinationCalculator = {
   init() {
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('button').addEventListener('click', this.handleCalculate);
+      Persistence.loadSettings();
+      document.querySelector('button').addEventListener('click', this.handleCalculate.bind(this));
     });
   },
 
-  handleCalculate: () => {
+  handleCalculate() {
     const minCal = Utils.getInputValue(Config.selectors.minCalories);
     const maxW = Utils.getInputValue(Config.selectors.maxWeight);
     
@@ -39,11 +70,17 @@ const CombinationCalculator = {
       return;
     }
 
-    const validCombinations = CombinationCalculator.calculateValidCombinations(minCal, maxW);
-    CombinationCalculator.displayResults(validCombinations);
+    const validCombinations = this.calculateValidCombinations(minCal, maxW);
+    
+    if (validCombinations.length > 0) {
+      Persistence.saveSettings(minCal, maxW);
+      Persistence.saveCombination(validCombinations[0]);
+    }
+    
+    this.displayResults(validCombinations);
   },
 
-  calculateValidCombinations: (minCal, maxW) => {
+  calculateValidCombinations(minCal, maxW) {
     const allCombinations = [];
     
     for (let i = 1; i < 32; i++) {
@@ -73,7 +110,7 @@ const CombinationCalculator = {
     );
   },
 
-  displayResults: (combinations) => {
+  displayResults(combinations) {
     Utils.clearElement(Config.selectors.combinationsList);
     
     if (combinations.length > 0) {
