@@ -1,0 +1,29 @@
+.element-card { 
+  transition: transform 0.2s; 
+  border: 2px solid transparent;
+}
+
+.element-card:hover { 
+  transform: translateY(-5px); 
+  border-color: #0d6efd;
+}
+
+.combination-card { 
+  background: #f8f9fa; 
+  border-left: 4px solid #0d6efd; 
+  margin-bottom: 1rem;
+}
+
+.param-card input[type="number"] {
+  font-weight: 500;
+  border: 2px solid #dee2e6;
+}
+
+.dynamic-element {
+  transition: all 0.3s;
+}
+
+.card-header {
+  background-color: #6c757d;
+  color: white;
+}
