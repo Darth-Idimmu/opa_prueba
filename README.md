@@ -30,7 +30,8 @@ Documentación:
   4. **Control de versiones**  
     - ✔️ Repositorio en GitHub  
     - ✔️ Commits semánticos
-    (Link: git clone git@github.com:Darth-Idimmu/opa_prueba.git )
+    (comando: git clone git@github.com:Darth-Idimmu/opa_prueba.git )
+    link: https://github.com/Darth-Idimmu/opa_prueba 
 
   5. **Persistencia de Datos**  
     - ✔️ Guarda y recupera datos de localStorage  
